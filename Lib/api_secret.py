@@ -1,0 +1,1 @@
+API_KEY = "6b692ea399df4bb6ae95abf54600fff0"
