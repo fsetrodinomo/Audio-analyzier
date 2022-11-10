@@ -15,3 +15,15 @@ def main():
         if args.api_key is None:
             raise RuntimeError("AAI_API_KEY environment variable not set. Try setting it now, or passing in your "
                                "API key as a command line argument with `--api_key`.")
+
+        header {
+            'authorization' : args.api_key,
+            'content-type' : 'application/json'
+        }
+
+        if args.local:
+            upload_url = utils.upload_file(args.audio_file,header)
+        else:
+            upload_url = {'upload_url' : args.audio_file}
+
+        transcript_response = utils.request_transcript(upload_url,header)
