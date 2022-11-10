@@ -27,3 +27,5 @@ def main():
             upload_url = {'upload_url' : args.audio_file}
 
         transcript_response = utils.request_transcript(upload_url,header)
+
+        polling_endpoint = utils.make_polling_endpoint(transcript_response)
