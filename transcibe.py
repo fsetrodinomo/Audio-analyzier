@@ -29,3 +29,15 @@ def main():
         transcript_response = utils.request_transcript(upload_url,header)
 
         polling_endpoint = utils.make_polling_endpoint(transcript_response)
+
+        utils.wait_for_completion(polling_endpoint, header)
+
+        with open('transcript.txt', 'w') as f:
+            for para in paragraphs:
+                print(para['text'] + '\n')
+                f.write(para['text'] + '\n')
+
+        return
+
+    if __name__ == '__main__':
+        main()
