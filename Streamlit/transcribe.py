@@ -28,3 +28,19 @@ def get_transcribe_id(token,url):
     id = response.json() ['id']
     print("Made request and file is currently queued")
     return id
+
+
+def get_text(token,transcribe_id):
+    endpoint = "https://api.assemblyai.com/v2/transcript/{transcribe_id}"
+    headers = {
+        "authorization" : token
+    }
+    result = requests.get(endpoint, headers=headers).json()
+    return result
+
+def upload_file(fileObj):
+    load_dotenv()
+    token = os.getenv("API_TOKEN")
+    file_url = get_url(token,fileObj)
+    transcribe_id = get_transcribe_id(token,file_url)
+    return token,transcribe_id
